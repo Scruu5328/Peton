@@ -1,0 +1,431 @@
+s = input("Enter somthing ")				# Ввод строки
+
+x = int(input("Enter number "))				# Ввод целого числа
+
+print(f"{s} и {x}")					# Вывод с помощью f-строки
+
+---------------------------------Условия-------------------------------------------
+
+if speed <= 24:
+    print("Low speed")
+elif speed > 24 and speed <= 56:			# Условия
+    print("Normal speed")
+else:
+    print("High speed")
+
+---------------------------------Циклы---------------------------------------------
+
+i = 5
+while i < 10:						# Цикл while
+    print(i)
+    i = i + 1
+
+print("Число\tКвадрат числа")
+for number in range(1, 11):				# Цикл for
+    square = number**2
+    print(f"{number}\t{square}")
+
+---------------------------------Функции-------------------------------------------
+
+def main():
+    message()						# Вызов функции
+def message():						# Функция
+    print('Hello')
+main()
+
+def my_func():
+    pass						# Временно пустая функция
+
+def show_double(num):					# Функция принимает аргумент
+    result = num * 2
+    print(result)
+
+func(arg2 = 0.5, arg1 = 1)				# Именованные аргументы
+def func(arg1, arg2):
+
+							# Глобальные переменные объявляются за пределами всех функций (или внутри с global)
+
+def sum(x, y):
+    result = x + y
+    return result					# Функция, возвращающая значение. Можно было и просто return x + y
+
+return x, y						# Можно возвращать несколько значений
+
+import my_module					# Импортирует функции из файла my_module.py
+
+---------------------------------Чтение и запись в файл----------------------------
+
+file = open('my_file.txt', 'w')				# Создание файла. r - чтение, w - создание и запись (перезапись, если уже 									# создано), a создание и запись (дописать в конец, если уже создано)
+
+file.write('Hello')					# Запись в файл
+file.close()						# Закрытие файла
+
+content = file.read()					# Чтение из файла (если открыт как 'r')
+line = file.readline()					# Чтение строки
+name = name.rstrip('\n')				# Убирает \n
+
+for line in file:					# Чтение из файла циклом
+    x = float(line)
+    print(f'x:.2f')
+
+
+import os
+os.remove('file.txt')					# Удаление файла
+os.rename('file.txt', 'new_file.txt')			# Переименование файла
+
+---------------------------------Исключения----------------------------------------
+
+try:							# Обработка исключений
+        hours = int(input('Склько часов отработал? '))
+except ValueError:
+        print('Должно быть число!')
+
+except ValueError as err:				# Запись исключения в переменную
+	print(err)
+
+except Exceptions as err:				# Запись любого исключения в переменную
+
+---------------------------------Списки и кортежи----------------------------------
+
+num_list = [2,4,6]					# Создание списка
+
+num_list = list(range(5))				# Преобразование в список
+
+num_list = [1] * 5					# Создание списка из пяти едениц
+
+for i in num_list:					# Обход списка
+print(num_list)
+
+print(num_list[2])					# Печать элемента по индексу
+
+list1 = [1,2,3]
+list2 = [4,5,6]
+list3 = list1 + list2					# Конкатенация списков, будет [1, 2, 3, 4, 5, 6]
+
+days = [1,2,3,4,5,6,7]
+mid_days = [2:5] 					# Срез списка, начало и конец (конец не входит в срез), будет 3,4,5
+mid_days = [:5]						# Если пропустить начало, срез будет с 0 элемента. То же с концом	
+numb[1:6:2]						# Можно задавать шаг
+
+prod_nums = ['ASS', 'BIG', 'LOL']
+    search = input('Что ищем? ')		
+    if search in prod_nums:				# Проверяет в списке ли значение, возвращает True или False
+        print(f'Твой {search} найден')
+    else:
+        print(f'{search} не найден')
+
+not in							# Проверяет не в списке ли значение
+
+append(значение)					# Добавляет значение в конец списка
+index(значение)						# Возвращает индекс первого такого значения
+insert(индекс, значение)				# Вставляет значение в позицию
+sort()							# Сортирует список по возрастанию
+remove(значение)					# Удаляет первое такое значение
+reverse() 						# Инвертирует список
+count(значение)						# Возвращает количество повторений значения в списке
+ 
+del my_list[2]						# Удаляет значение по индексу
+popped_item = my_list.pop()				# Удаляет последнее значение списка, но сохраняет его в переменную
+popped_item = my_list.pop(0)				# Или не последнее
+
+min(my_list)						# Принимает список как аргумент, находит минимум, то же с max
+
+list1 = [1,2,3]
+list2 = []
+for item in list1:
+    list2.append(item)					# Копирование списков циклом
+
+list1 = [1,2,3]
+list2 = [] + list1					# Тоже копирование, но проще, за счет конкатинации
+
+list2 = [item for item in list1] 			# Включение в список, тоже копирует (не обязательно именно item)
+
+list1 = [1,5,10,20]
+list2 = [i for i in list1 if i < 10] 			# Включение с условием, в list2 попадут только 1, 5
+
+
+my_file.writelines(my_list)				# Запись списка в файл (без \n)
+my_file.readlines()					# Чтение списка из файла
+
+letters = [['a','b'], ['c','d'], ['e','f']] 		# Двумерный список
+print(letters[2])					# Выведет ['e', 'f']
+print(letters[2][0])					# Выведет e
+
+random.choice(names)					# Случайный выбор из списка
+random.choices(names, k = 3)				# Вернет три значения. Могут повторяться
+random.sample(names, k = 3)				# Вернет три значения. Не могут повторяться
+
+
+my_tuple = (1,2,3,4)					# Создание кортежа
+
+number_tuple = (1,2,3)
+number_list = list(number_tuple) 			# Кортежи можно преобразовывать в списки и наоборот
+
+---------------------------------Строки--------------------------------------------
+
+count = 0
+my_string = input('Введите что-нибудь')			# Счетчик букв в строке
+for i in my_string:
+    if i == 'Б' or i == 'б':
+    count += 1
+print(f'Буква Б встречается {count} раз')
+
+my_string = 'Hello world'
+my_slice = my_string[0:4]				# Срез строки (будет Hell)
+my_slice2 = my_string[0:10:2]				# Можно задавать шаг (будет Hlowr)
+
+text = 'Seventy seven years'
+if 'seven' in text:					# in для поиска в строке, если найдено, возвращает True
+    print('Seven found')
+else:
+    print('Seven not found')
+
+my_string.isdigit()					# True если содержит только цифры
+my_string.isalpha()					# True если содержит только буквы
+my_string.isalnum()					# True если содержит только буквы или цифры
+my_string.islower()					# True если все буквы в нижнем регистре
+my_string.isupper()					# True если все буквы в верхнем регистре
+my_string.lower()					# Переводит строку в нижний регистр
+my_string.upper()					# Переводит строку в верхний регистр
+my_string.title()					# Переводит первые буквы строки в верхний регистр
+my_string.strip()					# Удаляет пробел в начале и конце строки
+my_string.strip(any_simbol)				# Удаляет символ в начале и конце строки
+my_string.replace('old_value', 'new_value')		# Заменяет первое значение на второе
+my_string.split()					# Создает из строки список со словами (лексемами/токенами)
+my_string.removeprefix('https://')			# Удаляет префикс в скобках (обязательно кавычки)
+my_string.removesuffix('.txt')				# Аналогично удаляет суффикс
+
+---------------------------------Словари и множества-------------------------------
+
+phonebook = {'Zhopik':'5328-122', "Vladik":'5329-441', 'Gogi':'5327-456'}  # Создание словаря
+
+if 'Vladik' in phonebook:				# Проверка, если ли элемент в словаре
+    print(phonebook['Vladik'])				# Вывод значения по ключу
+
+phonebook['Peppa'] = '5839-441'				# Добавление новой записи
+del phonebook['Gogi']					# Удаление записи
+
+phonebook = {}						# Создание пустого словаря. Способ 1
+phonebook = dict()					# Создание пустого словаря. Способ 2
+
+for item in phonebook:
+    print(f'Номер {item}: {phonebook[item]}')		# Вывод ключей и значений
+
+phonebook.clear()					# Очищает словарь
+var = phonebook.get('Vladik', 'Запись не найдена')	# Ищет значение по ключу, если не находит - возвращает значение по укмолчанию
+phonebook.items()					# Превращает пары ключ-значение в кортежи
+phonebook.keys()					# Возвращает все ключи в виде последовательности
+var = phonebook.pop('Vladik', 'Запись не найдена')	# Удаляет пару ключ-значение и присваевает значение, или выводит сообщение, если не 							# найдено
+key, value = phonebook.popitem()			# Удаляет пару и возвращает ее в виде кортежа, можно порознь (как в примере)
+phonebook.values()					# Возвращает значения в виде последовательности
+
+numbers = [1,2,3,4]
+squares = {item:item**2 for item in numbers}		# Включение в словарь. Преобразует список numbers в словарь squares
+
+phonebook_copy = {k:v for k,v in phonebook.items()}	# Включение копирует один словарь в другой
+
+myset = set(['a','b','c'])				# Создание множества из списка
+myset = set('abc')					# И строки. Результат один и тот же - {'a', 'c', 'b'}
+
+myset = set(['one','two','three'])			# Чтобы создать множество из слов, используем список
+
+myset.add('four')					# Добавление элемента
+myset.update(['five','six'])				# Добавление нескольких элементов 
+myset.update(myset2)					# Можно добавлять другое множество
+myset.remove('one')					# Удаление элемента. Вызовет исключение, если элемента нет
+myset.discard('two')					# Тоже удаление, но без вызова исключения
+myset.clear()						# Очищает всё множество
+set3 = set1.union(set2)					# Объединение множеств. Аналогично set3 = set1 | set2
+set3 = set1.intersection(set2)				# Пересечение множеств. Вернет только общие элементы. Аналогично set3 = set1 & set2
+set3 = set1.difference(set2)				# Разность. Вернет элементы 1-го, не входящие во 2-е множество. set3 = set1 - set2
+set3 = set1.symmetric_difference(set2)			# Вернет не входящие в оба множество одновременно. set1 ^ set2
+set2.issubset(set1)					# Возвращает True, если set2 полностью входит в set1 (подмножество). set2 <= set1
+set1.issuperset(set2)					# Возвращает True, если в set1 полностью входит set2 (надмножество). set1 >= set2
+
+set2 = {item in item in set1}				# Включение в множество
+
+import pickle						# Модуль для сериализации (консервации)
+output_file = open('phonebook.dat', 'wb')		# Открываем файл для записи
+pickle.dump(phonebook, output_file)			# Записываем словарь phonebook в файл
+input_file = open('phonebook.dat', 'rb')		# Открываем файл для чтения
+pb = pickle.load(input_file)				# Читаем файл в переменную
+
+
+---------------------------------Pip-----------------------------------------------
+
+pip list						# Команды pip вводим в cmd, не в IDLE Shell. Выводит список установленных модулей
+
+pip install requests					# Установка модуля requests
+
+pip uninstall requests -y				# Удаление модуля
+
+pyinstaller --onefile -w my_prog.py			# Компилирование с помощью pyinstaller
+
+---------------------------------ООП-----------------------------------------------
+
+class Coin:						# Создание класса    
+    def __init__(self):					# Обычно первый метод в определении класса
+
+my_coin = Coin()					# Создание экземпляра класса в main, если класс опрелен в том же файле
+my_coin = coin.Coin()					# То же, если класс импортирован из модуля coin.py (import coin)
+
+self.__sideup = 'Something'				# __ - делает атрибут класса приватным
+
+def set_price(self, price):				# Метод-мутатор (сеттер)
+        self.__price = price
+
+def get_price(self):					# Метод-получатель (геттер)
+        return self.__price
+
+p_name = input('Введи имя животинки ')
+p_type = input('Что за животинка? ')
+p_age = int(input('Введи возраст животинки '))
+pet1 = Pet(p_name, p_type, p_age)
+print(f'Животинку зовут {pet1.get_name()}')		# Использование геттера
+print(f'Она {pet1.get_type()}') 
+print(f'Ей {pet1.get_age() годков}')
+
+pet1.set_name('Жужа')					# Использование сеттера
+
+class Car(Automobile):					# Наследование от класса Automobile
+    def __init__(self, make, mileage, price, doors):	# Инициализируем все атрибуты - и надкласса и подкласса
+        Automobile.__init__(self, make, mileage, price) # Здесь только надкласса (без двоеточия!)
+        self.__doors = doors				# Здесь новый атрибут подкласса
+
+def set_doors(self, doors):				# Сеттери и геттеры только для новых атрибутов
+        self._doors = doors
+
+if isinstance(creature, animals.Mammal):		# isinstance проверяет является ли объект экземпляром класса/подкласса
+        creature.show_species()
+
+---------------------------------Рекурсия------------------------------------------
+
+def factorial(number):					# Вычисление факториала
+    if number == 0:
+        return 1
+    else:
+        return number * factorial(number - 1)
+
+---------------------------------GUI-----------------------------------------------
+
+import tkinter
+class MyGUI:
+    def __init__(self):
+        self.main_window = tkinter.Tk()			# Создает корневой виджет
+        self.main_window.title('Мой первый GUI')	# Задает заголовок
+	self.main_window.geometry('250x120+600+300')	# Задает размер окна и его положение на экране
+        tkinter.mainloop()				# Запускает цикл
+if __name__ == '__main__':
+    my_gui = MyGUI()
+
+self.main_window = tkinter.Tk()
+self.label1 = tkinter.Label(self.main_window, text = 'Hello world') # Вывод надписи в главном окне
+self.label2 = tkinter.Label(self.main_window, text = 'Its my GUI')
+borderwidth = 1, relief = 'solid'			# Атрибуты label, ширина рамки и стиль
+self.label1.pack(side = 'top')				# top можно не писать, стоит по умолчанию
+self.label2.pack(side = 'right')			# Выводит вторую надпись справа
+self.label1.pack(ipadx = 10, ipady = 5)			# Внутреннее заполнение по ширине и высоте
+self.label2.pack(padx = 10, pady = 5)			# Внешнее заполнение по ширине и высоте
+
+self.top_frame = tkinter.Frame(self.main_window)	# Создает фрейм внутри корневого виджета
+self.label1 = tkinter.Label(self.top_frame, text = 'OK')# Создает label внутри фрейма
+self.label1.pack()
+self.top_frame.pack()					# Фрейм тоже упаковывается
+
+import tkinter.messagebox				# Модуль для работы с кнопками
+self.my_button = tkinter.Button(self.main_window,	# Создает кнопку 
+                              text='Нажим меня',	# Надпись на кнопке
+                              command=self.do_something)# Обработчик событий (имя функции без скобок)
+def do_something(self):					# Функция в том же классе
+        tkinter.messagebox.showinfo('Реакция',		# Заголовок информационного окна
+			      'Благодарю, что нажали')	# Надпись в самом окне
+
+self.quit_button = tkinter.Button(self.main_window,	# Отдельная кнопка для выхода
+                      text='Выйти',
+                      command=self.main_window.destroy) # Уничтожает корневой виджет
+
+
+self.kilo_entry = tkinter.Entry(self.top_frame, width = 10) # Поле для ввода
+
+def convert(self):					# При нажатии на кнопку срабатывает функция
+        kilo = float(self.kilo_entry.get())		# Метод get получает из entry данные
+
+
+self.my_var = tkinter.StringVar()			# Сохраняем объект StringVar в переменную
+self.miles_label = tkinter.Label(self.mid_frame,
+                             textvariable = self.my_var)# Связываем ее с label
+self.my_var.set(miles)					# Вычисление передаем в my_var, которая отображает их в miles_label
+
+
+self.radio_var = tkinter.IntVar()			# Сохраняем объект IntVar в переменную
+self.radio_var.set(1)					# Ставим значение по умолчанию
+self.rb1 = tkinter.Radiobutton(self.top_frame, text='Вариант 1', # Связываем ее с радиокнопкой
+                               variable = self.radio_var,
+                               value = 1)		# Устанавливаем значение. Можно еще добавить command
+
+
+self.cb_var1 = tkinter.IntVar()				# Checkbutton тоже использует IntVar, но отдельный для КАЖДОГО флажка
+self.cb_var1.set(0)					# Но принимает знаечения ТОЛЬКО 0 или 1 
+self.cb1 = tkinter.Checkbutton(self.top_frame,		# Создаем флажок
+                                  text='Вариант 1',
+                                  variable=self.cb_var1)
+
+
+self.listbox = tkinter.Listbox(self.main_window)	# Создает список Listbox, можно задать кол-во строк (height) и ширину 							# строки (width), если поставить 0 - подгонится по содержимому 
+							# (по умолчанию 10 и 20, если ничего не указывать)
+self.listbox.insert(0, 'Понедельник')			# 0 - индекс, потом значение
+self.listbox.insert(1, 'Вторник')
+
+days = ['Пн','Вт','Ср','Чт']
+for day in days:					# Заполнение listbox из списка
+    self.listbox.insert(tkinter.END, day)		# Константа END добавляет значение в конец listbox
+
+index = self.listbox.curselection()			# Сохраняет выбранный элемент listbox в кортеж
+
+self.listbox.delete(0)					# Удаляет элемент listbox по индексу. Можно выбрать диапазон (0, 3)
+
+
+self.scrollbar = tkinter.Scrollbar(self.listbox_frame,	# Создание вертикальной полосы прокрутки
+                               orient=tkinter.VERTICAL)
+self.scrollbar.pack(side = 'right', fill=tkinter.Y)
+self.scrollbar.config(command=self.listbox.yview)
+self.listbox.config(yscrollcommand=self.scrollbar.set)
+
+---------------------------------SQLite--------------------------------------------
+
+import sqlite3						# Импорт SQLite
+conn = sqlite3.connect('contacts.db')			# Соединение с базой (если ее нет, она создается)
+cur = conn.cursor()					# Получение курсора БД
+cur.execute('''CREATE TABLE Inventory (ItemID INTEGER PRIMARY KEY NOT NULL, # Создание таблицы Inventory с тремя столбцами
+                                       ItemName TEXT,
+                                       Price REAL)''')
+conn.commit()						# Сохранение изменений
+conn.close()						# Выход из БД
+
+CREATE TABLE IF NOT EXISTS 				# Создаст таблицу только если она не существует
+DROP TABLE Temp						# Удалит таблицу Temp (можно использовать с IF EXISTS)
+
+INSERT INTO Inventory(ItemId, Name, Price)		# Вставка строки в таблицу Inventory
+            VALUES(1, 'Отвертка', 4.99)			# Собственно значения. Можно в одно VALUES в отдельных круглых скобках 
+							# вставлять несколько строк сразу
+
+item_id = int(input('Enter id '))			# Сохраняем значения в переменных
+item_name = input('Enter name ')
+price = float(input('Enter price ')
+cur.execute('''INSERT INTO Inventory(ItemId, Name, Price) # Записываем из переменных в таблицу
+               VALUES(?, ?, ?)''',			# Вот таким образом
+               (item_id, item_name, price))
+
+cur.execute('SELECT Name, Price FROM Inventory')	# Получаем значения наименования и цены (SELECT *, чтобы получить все)
+results = cur.fetchall()				# Сохраняем в список кортежей
+row = cur.fetchone()					# Можно получить только одно значение 
+
+SELECT Name FROM Inventory WHERE Price > 10		# Получение значения с условием
+SELECT * FROM Products WHERE Description LIKE "%Плитка%" # Получить все описания, где встречается "Плитка"
+SELECT Description, RetailPrice FROM Products ORDER BY RetailPrice # Отсортировать по RetailPrice от меньшего к большему
+ORDER BY RetailPrice DESC				# От большего к меньшему
+
+SELECT AVG(RetailPrice) FROM Products			# Вычисляет среднюю RetailPrice
+SELECT SUM(RetailPrice) FROM Products			# Вычисляет сумму RetailPrice. Также есть MIN, MAX
+
+UPDATE Products SET RetailPrice = 13.99 WHERE Description == "Шоколадные хрюндели" # Обновление цены в строке 
