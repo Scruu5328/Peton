@@ -429,3 +429,4 @@ SELECT AVG(RetailPrice) FROM Products			# Вычисляет среднюю Reta
 SELECT SUM(RetailPrice) FROM Products			# Вычисляет сумму RetailPrice. Также есть MIN, MAX
 
 UPDATE Products SET RetailPrice = 13.99 WHERE Description == "Шоколадные хрюндели" # Обновление цены в строке 
+DELETE FROM Products WHERE ProductID == 10		# Удаление строки
