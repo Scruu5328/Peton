@@ -73,6 +73,22 @@ import os
 os.remove('file.txt')					# Удаление файла
 os.rename('file.txt', 'new_file.txt')			# Переименование файла
 
+from pathlib import Path
+path = Path('pi_digits.txt')				# Альтернативный способ
+contents = path.read_text()				
+print(contents)
+
+lines = contents.splitlines()				# Получение строк, потом считываются циклом
+
+message = 'I really like dogs'
+print(message.replace('dogs', 'cats'))			# Замена одного слова другим
+
+xxx = open('file.txt', 'r', encoding='utf-8')		# Для чтения русских букв с open
+contents = path.read_text(encoding='utf-8')		# Для чтения русских букв с Path
+
+path = Path('new_file')					# Альтернативное создание файла
+path.write_text('Hello')				# И запись в него
+
 ---------------------------------Исключения----------------------------------------
 
 try:							# Обработка исключений
@@ -430,3 +446,48 @@ SELECT SUM(RetailPrice) FROM Products			# Вычисляет сумму RetailPr
 
 UPDATE Products SET RetailPrice = 13.99 WHERE Description == "Шоколадные хрюндели" # Обновление цены в строке 
 DELETE FROM Products WHERE ProductID == 10		# Удаление строки
+
+cur.execute('PRAGMA foreign_keys=ON')			# Активирует поддержку внешних ключей в SQLite
+
+CREATE TABLE Employees(EmployeeID INTEGER PRIMARY KEY NOT NULL, # Создание таблицы Employee
+                       FOREIGN KEY(DepartamentID) REFERENCES    # с внешним ключом 
+		       Departaments(DepartamenID))              # из таблицы Departaments
+
+SELECT							# Получение данных из двух таблиц - Employees и Departaments
+      Employees.Name,					# Имя работника из Employees
+      Departaments.DepartamentName			# Название отдела из Departaments
+FROM
+      Employees, Departaments
+WHERE
+      Employees.DepartamentID == Departaments.DepartamentID
+
+---------------------------------ФП------------------------------------------------
+
+lambda x, y: x + y					# Лямбда-функция
+
+l_f = lambda x, y: x + y				# Присвоение лямбда-функции переменной
+l_f(5, 7)
+
+func = l_f						# Присовение переменной с л-ф другой переменной
+func(3, 4)
+
+seq = (1,2,3,4)
+seq2 = (5,6,7,8)
+result = map(l_f, seq, seq2)				# Использование функции map для работы с последовательностями
+list(result)						# Получение результата [6, 8, 10, 12]
+
+is_even = lambda x: x % 2 == 0
+seq = (1,2,3,4,5)
+filtered = filter(is_even, seq)				# Функция filter фильтрует последовательность seq функцией is_even
+
+---------------------------------Локали--------------------------------------------
+
+import locale						# Импорт библиотеки
+loc = locale.getlocale()				# Запомнить текущую локаль
+locale.setlocale(locale.LC_ALL, "Russian_Russia.1251")  # Изменить локаль
+
+salary = 50000.0
+print('Ваша ежемесячная зарплата составляет ',		# Теперь можно выводить в фромате с запятой
+locale.format('%.2f', salary, grouping=True), sep='')
+
+locale.setlocale(locale.LC_ALL, loc)			# В конце программы вернуть локаль
