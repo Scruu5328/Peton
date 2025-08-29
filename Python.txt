@@ -89,6 +89,12 @@ contents = path.read_text(encoding='utf-8')		# Для чтения русски�
 path = Path('new_file')					# Альтернативное создание файла
 path.write_text('Hello')				# И запись в него
 
+import pickle						# Модуль для сериализации (консервации)
+output_file = open('phonebook.dat', 'wb')		# Открываем файл для записи
+pickle.dump(phonebook, output_file)			# Записываем словарь phonebook в файл
+input_file = open('phonebook.dat', 'rb')		# Открываем файл для чтения
+pb = pickle.load(input_file)				# Читаем файл в переменную
+
 ---------------------------------Исключения----------------------------------------
 
 try:							# Обработка исключений
@@ -260,13 +266,6 @@ set1.issuperset(set2)					# Возвращает True, если в set1 полн
 
 set2 = {item in item in set1}				# Включение в множество
 
-import pickle						# Модуль для сериализации (консервации)
-output_file = open('phonebook.dat', 'wb')		# Открываем файл для записи
-pickle.dump(phonebook, output_file)			# Записываем словарь phonebook в файл
-input_file = open('phonebook.dat', 'rb')		# Открываем файл для чтения
-pb = pickle.load(input_file)				# Читаем файл в переменную
-
-
 ---------------------------------Pip-----------------------------------------------
 
 pip list						# Команды pip вводим в cmd, не в IDLE Shell. Выводит список установленных модулей
@@ -406,6 +405,54 @@ self.scrollbar = tkinter.Scrollbar(self.listbox_frame,	# Создание вер
 self.scrollbar.pack(side = 'right', fill=tkinter.Y)
 self.scrollbar.config(command=self.listbox.yview)
 self.listbox.config(yscrollcommand=self.scrollbar.set)
+
+
+self.main_window.option_add("*tearOff", 0) 		# Отключение пунктира в меню (* обязательно)
+self.main_menu = tkinter.Menu()
+self.file_menu = tkinter.Menu()
+self.save_menu = tkinter.Menu()
+
+self.file_menu.add_command(label='New')
+self.file_menu.add_cascade(label='Save', menu = self.save_menu) # Вложенные меню
+self.file_menu.add_command(label='Open')
+self.file_menu.add_separator()
+self.file_menu.add_command(label='Exit', command=self.main_window.destroy) # Функции меню
+
+self.save_menu.add_command(label='Save as')   
+     
+self.main_menu.add_cascade(label='File', menu=self.file_menu)    # Добавление пункта меню
+self.main_menu.add_cascade(label='Edit') 
+self.main_menu.add_cascade(label='View')     
+  
+self.main_window.config(menu=self.main_menu) 		# Установка меню для текущего окна
+
+
+
+self.button = tkinter.Button(text='Создать окно', command=self.new_win)	# Создание нового окна нажатием кнопки
+def new_win(self):
+        self.window = tkinter.Tk()			# Создаем окно как обычно
+
+
+
+from tkinter import ttk					# Импорт ttk для использования Treeview
+people = [('Tom', 38, 'tom@email.com'), ('Bob', 42, 'bob@email.com')] # Список кортежей для заполнения
+columns = ('name', 'age', 'email')
+
+self.tree = ttk.Treeview(columns=columns, show='headings') # Создаем таблицу и колонки
+self.tree.pack()
+
+self.tree.heading('name', text='Имя', anchor='w')	# Заполняем шапку таблицы, выравнивание по левому краю ('w')
+self.tree.heading('age', text='Возраст', anchor='w')
+self.tree.heading('email', text='Email', anchor='w')
+
+self.tree.column('#1', stretch='no', width=70) 		# запрет растягивания столбцов
+self.tree.column('#2', stretch='no', width=60)
+self.tree.column('#3', stretch='no', width=100)
+
+for person in people:
+    self.tree.insert('', 'end', values=person)		# Заполняем таблицу из списка, данные добавляются в конец ('end')
+
+далее прокрутка в таблице
 
 ---------------------------------SQLite--------------------------------------------
 
