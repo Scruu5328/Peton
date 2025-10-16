@@ -1,0 +1,39 @@
+Скачать в pip virtualenv
+В папке проекта virtualenv testenv
+.\testenv\Scripts\activate
+Название папки в командной строке должно стать в круглых скобках.
+В pip установить django. 
+Для создания проекта вводим django-admin startproject my_project .   (Обязательно с точкой в конце!!)
+Создаем базу данных проекта python manage.py migrate
+Запуск сервера python manage.py runserver
+При запущенном сервере в другом окне (тоже активировать виртуальную среду) python manage.py startapp learning_logs (запустит приложение и создаст папку learning_logs)
+В этой папке добавляем в файл models.py
+class Topic(models.Model):
+    text = models.CharField(max_length=200)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text
+
+В папке проекта в файле settings.py в блок INSTALLED APPS добавляем в конце название нашего приложения  'learning_logs',
+python manage.py makemigrations learning_logs
+python manage.py migrate
+Каждый раз изменяя приложение нужно делать две предыдущие команды
+Создаем суперпользователя python manage.py createsuperuser
+В папке learning_logs редактируем файл admin.py
+from .models import Topic
+admin.site.register(Topic)
+
+Теперь можно зайти в админку http://localhost:8000/admin/
+Заходим в Topics и создаем там темы
+
+
+
+
+
+
+
+
+
+C:\Users\taran\AppData\Local\Programs\Python\Python313\learning_log
+Zhopik 123
