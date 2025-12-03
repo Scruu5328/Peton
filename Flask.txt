@@ -148,3 +148,69 @@ alt='Company logo'
 <p>Hello, {{ name }}</p>
 {% endblock %}
 
+++++++++++++++++++++++++++
+
+Создаем контактную форму contact.html:
+<form method='post' action='{{url_for('index')}}'>
+<label for='name'>Name:</label>
+<input type='text' id='name' name='name'><br><br>
+<label for='email'>Email:</label>
+<input type='text' id='email' name='email'><br><br>
+<input type='submit' value='Submit'>
+</form>
+
+Добавляем маршрут в views:
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+Обрабатываем форму:
+from flask import request, redirect, url_for
+---пропуск---
+@app.route('/contact', methods=['POST'])	# Только этот код не работает((
+def handle_form():
+    name = request.form('name')
+    email = request.form('email')
+    # Обработать или сохранить данные формы
+    return redirect(url_for('thank_you'))
+
+Создаем форму для загрузки файлов:
+<form method='post' action="{{url_for(handle_file_upload)}}"
+enctype="multipart/form-data">
+    <label for="uploaded_file">Upload file:</label>
+    <input type="file" id="uploaded_file" name="file">
+    <input type="submit" value="Upload">
+</form>
+
+Создаем маршрут для загрузки файлов:
+import os
+from werkzeug.utils import secure_filename
+---пропуск---
+@app.route('/handle_file_upload', methods=['POST'])	# Только этот код тоже не работает((
+def handle_file_upload():
+    file=request.files('file')
+    if file and allowed_file(file.filename):
+        filename = secure_filename
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return redirect(url_for('uploaded_file', filename=filename))
+    return 'File upload unsuccessful'
+
+++++++++++++++++++++++++++
+
+Работа с базами данных
+
+Устанавливаем SQLAlchemy: pip install flask_sqlalchemy
+
+В файл __init__.py:							# А может и не в нем
+from flask_sqlalchemy import SQLAlchemy
+---пропуск---
+app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///yourdatabase.db'	# Путь к БД
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False			# Выключение обработки сигналов (экономия ресурсов)
+db = SQLAlchemy(app)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    def __repr__(self):             					# Магический метод для отладки
+        return '<User {}>'.format(self.username)
+
