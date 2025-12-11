@@ -24,6 +24,15 @@ if __name__ == '__main__':
 
 ++++++++++++++++++++++++++
 
+Вместо декоратора можно использовать функцию dd_url_rule():
+
+def index():
+    return 'Hello World'
+
+app.add_url_rule('/', 'index', index)	# URL, конечная точка и название функции представления
+
+++++++++++++++++++++++++++
+
 Файл __init__.py:
 from flask import Flask
 app = Flask(__name__)
@@ -69,9 +78,16 @@ if __name__ == '__main__':
 @app.route('user/<username>')
 def show_user_profile(username):
     return f'Пользователь {username}'
-@app.route('post/<int:post_id>')
+@app.route('post/<int:post_id>')		# Примет только целочисленные id в url
 def show_post(post_id):
     return f'Пост {post_id}'
+@app.route('user/<int:user_id>')
+def user_profile(user_id):
+    retirn 'Profile page of user #{}'.format(user_id)
+    
+@app.route('books/<genre>')
+def books(genre):
+    return "All books in {} category".format(genre)
 
 Использование разных HTTP-методов (пример):
 @app.route('login', methods=['GET', 'POST'])
@@ -201,16 +217,16 @@ def handle_file_upload():
 
 Устанавливаем SQLAlchemy: pip install flask_sqlalchemy
 
-В файл __init__.py:							# А может и не в нем
+В файл __init__.py:							# А можно и не в нем
 from flask_sqlalchemy import SQLAlchemy
 ---пропуск---
-app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///yourdatabase.db'	# Путь к БД
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///yourdatabase.db'	# Путь к БД
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False			# Выключение обработки сигналов (экономия ресурсов)
 db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    def __repr__(self):             					# Магический метод для отладки
+    def __repr__(self):             					# Магический метод для отладки (можно и без него)
         return '<User {}>'.format(self.username)
 

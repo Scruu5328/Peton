@@ -26,6 +26,102 @@ admin.site.register(Topic)
 
 Теперь можно зайти в админку http://localhost:8000/admin/
 Заходим в Topics и создаем там темы
+В файле models.py (где класс Topic):
+class Entry(models.Model):
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    text = models.TextField()
+    data_added = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = 'entries'
+        
+    def __str__(self):
+        return f'{self.text[:50]}...'
+
+Редактируем файл admin.py:
+from django.contrib import admin
+from .models import Topic, Entry		# добавить Entry
+admin.site.register(Topic)
+admin.site.register(Entry)			# добавить строку
+
+В админке появились Entry, создаем их
+Можно включить интерпретатор в консоли python manage.py shell
+В файл urls.py добавляем:
+from django.contrib import admin
+from django.urls import path, include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('learning_logs.urls')),
+]
+
+Создаем файл urls.py в папке проекта:
+from django.urls import path
+from . import views
+
+app_name = 'learning_logs'
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+
+В этой же папке редактируем views.py:
+from django.shortcuts import render
+# Create your views here.
+def index(request):
+    return render(request, 'learning_logs/index.html')
+
+В папке с проектом создаем папку templates, в ней папку с названием проекта, а в ней файл index.html
+<p>Zhopa</p>
+<p> Zhopa helps you keep your ass</p>
+Теперь эта страница открывается по localhost:8000. В этой же папке создаем файл base.html
+<p>
+<a href = "{% url 'zhopa:index' %}">Zhopa</a>
+</p>
+{% block content %}{% endblock content %}
+
+Снова редактируем index.html:
+{% extends 'zhopa/base.html' %}
+{% block content %}
+<p> Zhopa helps you keep your ass</p>
+{% endblock content %}
+
+Редактируем urls.py:
+urlpatterns = [
+# Главная страница.
+path('', views.index, name='index'),
+# Страница со списком всех тем.
+path('topics/', views.topics, name='topics'), # добавляем строку
+]
+
+Редактируем views.py:
+from django.shortcuts import render
+from .models import Topic
+def index(request):
+    return render(request, 'zhopa/index.html')    
+def topics(request):
+    '''Выводит список тем'''
+    topics = Topic.objects.order_by('date_added')
+    context = {'topics' : topics}
+    return render(request, 'zhopa/topics.html', context)
+
+В той же папке, где находится index.html, создаем topics.html:
+{% extends 'zhopa/base.html' %}
+{% block context %}
+  <p>Topics</p>
+  <ul>
+    {% for topic in topics %}
+      <li>{{ topic }}</li>
+    {% empty %}
+      <li>No topics have been added yept</li>
+    {% endfor %}
+  </ul>
+{% endblock context %}
+
+Редактируем base.html:
+<p>
+  <a href = "{% url 'zhopa:index' %}">Zhopa</a> -
+  <a href={% url 'zhopa:topics' %}>Topics</a>
+</p>
+{% block content %}{% endblock content %}
 
 
 
@@ -35,5 +131,8 @@ admin.site.register(Topic)
 
 
 
-C:\Users\taran\AppData\Local\Programs\Python\Python313\learning_log
+
+
+
+C:\Users\taran\AppData\Local\Programs\Python\Python313\ass
 Zhopik 123
